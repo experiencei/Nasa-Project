@@ -32,5 +32,6 @@ function addNewLaunch(launch) {
 }
 
 module.exports = {
-    getAllLaunches 
+    getAllLaunches ,
+    addNewLaunch
 }
