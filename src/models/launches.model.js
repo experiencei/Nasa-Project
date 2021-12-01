@@ -4,7 +4,7 @@ const planets = require('./planets.mongo')
 const launches = new Map();
 
 
-let latestFlightNumber = 100;
+// let latestFlightNumber = 100;
 
 const launch = {
     flightNumber : 100 ,
@@ -27,6 +27,12 @@ function existsLaunchWithId(launchIdd){
 // function getAllLaunches() { 
 //     return Array.from(launches.values());
 // }
+
+async function getLatestFlightNumber(){
+   const latestLaunch = await launchesDatabase
+   .findOne()
+   .sort("flightNumber");
+}
 
  async function getAllLaunches() { 
     return await launchesDatabase.find({} , { 
