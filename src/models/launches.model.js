@@ -21,8 +21,15 @@ const launch = {
 
 // launches.set(launch.flightNumber , launch)
 
-function existsLaunchWithId(launchIdd){
-  return  launches.has(launchIdd)
+// function existsLaunchWithId(launchIdd){
+//   return  launches.has(launchIdd)
+// }
+
+function existsLaunchWithId(launchId){
+  return  await launchesDatabase.findOne({
+    flightNumber : launchId
+
+  })
 }
 
 // function getAllLaunches() { 
@@ -54,7 +61,7 @@ async function saveLaunch(launch) {
     if(!planet) {
         throw new Error("No matching planet found")
     }
-    await launchesDatabase.updateOne({
+    await launchesDatabase.findOneAndUpdate({
         flightNumber : launch.flightNumber,
     } , launch , {
         upsert : true,
@@ -92,8 +99,11 @@ function abortLaunchById(launchId) {
 
 module.exports = {
     getAllLaunches ,
-    addNewLaunch ,
+    // addNewLaunch ,
     existsLaunchWithId ,
     abortLaunchById ,
     scheduleNewLaunch
 }
+
+
+// avoid updatOne instead use findOnAndUpdate  ($setInfo $ )
