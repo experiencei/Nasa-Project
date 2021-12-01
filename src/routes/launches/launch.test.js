@@ -4,6 +4,10 @@ const { mongoConnect } = require("../../services/mongo")
 
 
 describe('Launches API ' , () => {{
+    beforeAll(() => {
+        mongoConnect()
+    })
+
     describe('Test GET /launches' , ()=> {
         test('should respond with 200 Succcess', async () => {
             const response =await request(app)
