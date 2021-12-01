@@ -4,8 +4,8 @@ const { mongoConnect } = require("../../services/mongo")
 
 
 describe('Launches API ' , () => {{
-    beforeAll(() => {
-        mongoConnect()
+    beforeAll(async () => {
+       await mongoConnect()
     })
 
     describe('Test GET /launches' , ()=> {
