@@ -100,12 +100,11 @@ async function saveLaunch(launch) {
 
 
 async function abortLaunchById(launchId) {
-
  const aborted = await launchesDatabase.updateOne({
         flightNumber : launchId
     } , {
         upcoming : false,
-        success : false
+        success : false,
     })
 
     return aborted.ok === 1 && aborted.nModified === 1;
