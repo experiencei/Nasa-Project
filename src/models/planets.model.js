@@ -31,13 +31,13 @@ function loadPlanetsData() {
         console.log(err);
         reject(err)
     })
-    .on("end" , () =>{
-       const 
+    .on("end" , async () =>{
+       const countPlanetsFound = (await getAllPlanets()).length
 
-        console.log(`${habitablePlanet.length} habitablePlanets found`);
-        console.log(habitablePlanet.map((planet) => {
-            return planet["kepler_name"]
-        }))
+        console.log(`${countPlanetsFound} habitablePlanets found`);
+        // console.log(countPlanetsFound.map((planet) => {
+        //     return planet["kepler_name"]
+        // }))
         resolve()
     });
 })
@@ -48,7 +48,9 @@ function loadPlanetsData() {
 // }
 
 async function getAllPlanets() {
-    return await planets.find({})
+    return await planets.find({},{ 
+        "_id" : 0 , "__v" : 0,
+    });
 }
 
 async function savePlanets(planet) {
