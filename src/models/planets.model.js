@@ -2,6 +2,8 @@ const { parse } = require('csv-parse');
 const fs = require('fs');
 const path = require('path');
 
+const planets = require('./planets.mongo')
+
 const habitablePlanet = [];
 
 
@@ -18,9 +20,12 @@ function loadPlanetsData() {
             comment : "#" ,
             columns : true,
         }))
-    .on("data" , (data) => {
+    .on("data" , async (data) => {
         if(isHabitable(data)){
-            habitablePlanet.push(data)
+            // habitablePlanet.push(data)
+         await planets.create({
+            keplerName : data.kepler_name,
+         })
         }
     })
     .on("error" , (err) => {
