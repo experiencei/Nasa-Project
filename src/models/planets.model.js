@@ -4,7 +4,7 @@ const path = require('path');
 
 const planets = require('./planets.mongo')
 
-const habitablePlanet = [];
+// const habitablePlanet = [];
 
 
 function isHabitable(planet) {
@@ -22,10 +22,9 @@ function loadPlanetsData() {
         }))
     .on("data" , async (data) => {
         if(isHabitable(data)){
+            // TODO : replace create below with upsert = insert + update (meaning they have to be addded once!)
             // habitablePlanet.push(data)
-         await planets.create({
-            keplerName : data.kepler_name,
-         })
+            savePlanets(data)
         }
     })
     .on("error" , (err) => {
@@ -33,6 +32,8 @@ function loadPlanetsData() {
         reject(err)
     })
     .on("end" , () =>{
+       const 
+
         console.log(`${habitablePlanet.length} habitablePlanets found`);
         console.log(habitablePlanet.map((planet) => {
             return planet["kepler_name"]
@@ -41,8 +42,28 @@ function loadPlanetsData() {
     });
 })
 }
-function getAllPlanets() {
-    return habitablePlanet
+
+// function getAllPlanets() {
+//     return habitablePlanet
+// }
+
+async function getAllPlanets() {
+    return await planets.find({})
+}
+
+async function savePlanets(planet) {
+    try {
+        await planets.updateOne({
+            keplerName : planet.kepler_name,
+         } , {
+            keplerName : planet.kepler_name,
+         } , {
+             upsert : true,
+         }) ;
+    } catch(err) {
+        console.error(`Could not save planet ${err}`)
+    }
+   
 }
 
 module.exports = {
