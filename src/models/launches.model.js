@@ -51,6 +51,12 @@ async function loadLaunchData(){
             ]
         },
     })
+
+  const launchDocs = response.data.docs;
+
+  for (const launchDoc  of launchDocs) {
+      
+  }
 }
 
 async function existsLaunchWithId(launchId){
