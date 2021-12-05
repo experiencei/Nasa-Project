@@ -16,9 +16,9 @@ const launch = {
     rocket : "Explorer IS1", //rocket.name
     launchDate : new Date("December 27, 2030"), //date_local
     target : "Kepler-442 b" , //not applicable
-    customer : ["Experience" , "NASA"] ,
-    upcoming : true,
-    success : true ,
+    customer : ["Experience" , "NASA"] , //payload.customers for each
+    upcoming : true,  //upcoming
+    success : true ,  //success
 }
  saveLaunch(launch);
 
@@ -32,7 +32,7 @@ const launch = {
 async function loadLaunchData(){
     const SPACEX_API_URL = "https://api.spacexdata.com/v4/launches/query"
     console.log("Dowloading Launch Data ...");
-    await axios.post(SPACEX_API_URL , {
+    const response = await axios.post(SPACEX_API_URL , {
         query : {} ,
         options : {
             populate : [
@@ -41,6 +41,12 @@ async function loadLaunchData(){
                     select : {
                         name : 1
                     }
+                } ,
+                {
+                     path : "payloads" ,
+                     select : {
+                         customers : 1
+                     }
                 }
             ]
         },
