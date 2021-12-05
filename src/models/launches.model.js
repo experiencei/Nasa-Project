@@ -1,5 +1,8 @@
+const axios = require("axios")
+
 const launchesDatabase = require('./launches.mongo')
 const planets = require('./planets.mongo')
+
 
 const DEFAULT_FLIGHT_NUMBER = 100; 
 // const launches = new Map();
@@ -27,7 +30,11 @@ const launch = {
 
 
 async function loadLaunchData(){
+    const SPACEX_API_URL = "https://api.spacexdata.com/v4/launches/query"
     console.log("Dowloading Launch Data ...");
+    await axios.post(SPACEX_API_URL , {
+        
+    })
 }
 
 async function existsLaunchWithId(launchId){
