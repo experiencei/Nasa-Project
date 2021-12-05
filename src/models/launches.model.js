@@ -11,11 +11,11 @@ const DEFAULT_FLIGHT_NUMBER = 100;
 // let latestFlightNumber = 100;
 
 const launch = {
-    flightNumber : 100 ,
-    mission  : "Kepler Exploration X" ,
-    rocket : "Explorer IS1",
-    launchDate : new Date("December 27, 2030"),
-    target : "Kepler-442 b" ,
+    flightNumber : 100 ,  //flight_number
+    mission  : "Kepler Exploration X" , //name
+    rocket : "Explorer IS1", //rocket.name
+    launchDate : new Date("December 27, 2030"), //date_local
+    target : "Kepler-442 b" , //not applicable
     customer : ["Experience" , "NASA"] ,
     upcoming : true,
     success : true ,
@@ -33,7 +33,17 @@ async function loadLaunchData(){
     const SPACEX_API_URL = "https://api.spacexdata.com/v4/launches/query"
     console.log("Dowloading Launch Data ...");
     await axios.post(SPACEX_API_URL , {
-        
+        query : {} ,
+        options : {
+            populate : [
+                {
+                    path : "rocket" ,
+                    select : {
+                        name : 1
+                    }
+                }
+            ]
+        },
     })
 }
 
