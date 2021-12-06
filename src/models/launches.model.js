@@ -76,9 +76,7 @@ async function populateLaunches() {
   }
 }
 
-async function loadLaunchData(){
-
-    async function loadLaunchData() {
+async function loadLaunchData() {
       const firstLaunch = await findLaunch({
           flightNumber : 1 ,
           rocket : "Falcon 1" ,
@@ -89,9 +87,9 @@ async function loadLaunchData(){
      }else {
       await  populateLaunches();
      }
-    }
+ }
    
-}
+
 async function findLaunch(filter){
     return await launchesDatabase.findOne(filter)
 }
@@ -132,7 +130,6 @@ async function saveLaunch(launch) {
     //     throw new Error("No matching planet found")
     // }
    
-
     await launchesDatabase.findOneAndUpdate({
         flightNumber : launch.flightNumber,
     } , launch , {
