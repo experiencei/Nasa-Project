@@ -6,6 +6,7 @@ const { getAllLaunches ,
 } = require("../../models/launches.model");
 
 async function httpGetAllLaunches(req , res ){
+   const { page , limit } = req.query;
    return res.status(200).json(await getAllLaunches())
 }
 
