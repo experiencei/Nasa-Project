@@ -51,6 +51,11 @@ async function populateLaunches() {
             ]
         },
     })
+  
+   if(response.status !== 200) {
+       console.log("Problem downloading launch data");
+       throw new Error("Launch data download failed")
+   }
 
   const launchDocs = response.data.docs;
 
@@ -118,7 +123,7 @@ async function getLatestFlightNumber(){
  async function getAllLaunches() { 
     return await launchesDatabase.find({} , { 
         "_id" : 0 , "__v" : 0,
-    })
+    }).limit
 }
 
 async function saveLaunch(launch) {
