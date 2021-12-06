@@ -10,17 +10,17 @@ const DEFAULT_FLIGHT_NUMBER = 100;
 
 // let latestFlightNumber = 100;
 
-const launch = {
-    flightNumber : 100 ,  //flight_number
-    mission  : "Kepler Exploration X" , //name
-    rocket : "Explorer IS1", //rocket.name
-    launchDate : new Date("December 27, 2030"), //date_local
-    target : "Kepler-442 b" , //not applicable
-    customer : ["Experience" , "NASA"] , //payload.customers for each
-    upcoming : true,  //upcoming
-    success : true ,  //success
-}
- saveLaunch(launch);
+// const launch = {
+//     flightNumber : 100 ,  //flight_number
+//     mission  : "Kepler Exploration X" , //name
+//     rocket : "Explorer IS1", //rocket.name
+//     launchDate : new Date("December 27, 2030"), //date_local
+//     target : "Kepler-442 b" , //not applicable
+//     customer : ["Experience" , "NASA"] , //payload.customers for each
+//     upcoming : true,  //upcoming
+//     success : true ,  //success
+// }
+//  saveLaunch(launch);
 
 // launches.set(launch.flightNumber , launch)
 
@@ -69,7 +69,7 @@ async function populateLaunches() {
         flightNumber : launchDoc["flight_number"] ,
         mission : launchDoc["name"] ,
         rocket : launchDoc["rocket"] ["name"] ,
-        lauchData : launchDoc['date_local'] ,
+        launchDate : launchDoc['date_local'] ,
         upcoming : launchDoc['upcoming'] ,
         success : launchDoc['success'] ,
         customers,
@@ -156,10 +156,10 @@ async function saveLaunch(launch) {
 
      const newFlightNumber = await getLatestFlightNumber() + 1;
    const newLaunch = Object.assign(launch , {
-           success : true ,
-            upcoming: true ,
-            customers : ["Experience iq" , "NASA"] ,
-            flightNumber : newFlightNumber
+             success : true ,
+             upcoming: true ,
+             customers : ["Experience iq" , "NASA"] ,
+             flightNumber : newFlightNumber
    });
 
    await saveLaunch(newLaunch);
