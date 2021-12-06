@@ -30,7 +30,18 @@ const launch = {
 
 
 async function loadLaunchData(){
-    const SPACEX_API_URL = "https://api.spacexdata.com/v4/launches/query"
+    const SPACEX_API_URL = "https://api.spacexdata.com/v4/launches/query" ;
+
+    async function loadLaunchData() {
+      const firstLaunch = await findLaunch({
+          flightNumber : 1 ,
+          rocket : "Falcon 1" ,
+          mission : "FalconSat"
+      })
+     if (firstLaunch) {
+         return
+     }
+    }
     console.log("Dowloading Launch Data ...");
     const response = await axios.post(SPACEX_API_URL , {
         query : {} ,
@@ -79,7 +90,7 @@ async function findLaunch(filter){
 async function existsLaunchWithId(launchId){
   return  await findLaunch({
     flightNumber : launchId
-    
+
   })
 }
 
